@@ -1,0 +1,100 @@
+ubuntu
+Need to install docker in system
+sudo apt-get install docker.io
+
+check docker info
+
+if it's throws permission denied then execute below commands..
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+logoff anf login to the command prompt
+
+sudo docker pull python:3.7
+
+the above command will download a docker image with ubuntu os and python 3.7 installed init
+
+Run the above image.
+
+To see the image.. sudo docker images
+
+sudo docker run -itd python:3.7
+
+To see the running containers..
+sudo docker ps
+
+can see python:3.7 container is running..
+Copy your code to container..
+sudo docker cp db14/warehouse/ 956e077a6f42:/
+956e077a6f42 is container id can get by using command "sudo docker ps"
+
+Conncet to the container..
+sudo docker exec -it 956e077a6f42 bash
+
+check whether you can see the copied warehouse folder available or not..
+
+And execute bellow commands
+cd warehouse
+pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
+gunicorn --bind 0.0.0.0:8002 warehouse.wsgi --workers=5
+
+But now you cant acess this server from your vm browser, because the docker has his own
+private network. To access this private network, need to bind your vm network with 
+docker private network with some port number....
+
+before going to do that commit all your changes which are there in container now to some other image..
+
+
+sudo docker commit 956e077a6f42 app_python:3.7
+
+kill the running contianer now..
+sudo docker container kill 956e077a6f42
+it will kill the process, to remove perminantly this container from vmm.
+means can see this container using docker ps -a command
+ sudo docker container rm 956e077a6f42
+
+
+Run the app container..
+sudo docker run -itd -p 8002:8002 app_python:3.7
+
+connect to the app cointainer
+
+sudo docker exec -it 503f2274339f bash
+
+
+Execute the below command in side the container.
+
+gunicorn --bind 0.0.0.0:8002 warehouse.wsgi
+
+Access the url http://localhost:8002 has to show your webpage.
+
+
+To automate the image creation need to write a docker file..
+#dockerfile
+FROM python:3.7
+ADD . /
+RUN pip install -r requirements.txt
+RUN python manage.py makemigrations
+RUN python manage.py migrate
+RUN chmod 777 entry.sh
+ENTRYPOINT ["/entry.sh"]
+
+
+#entry.sh
+cd code & gunicorn --bind 0.0.0.0:8002 warehouse.wsgi
+
+
+To build an image. Goto the folder where docker file created
+sudo docker build -t final_app .
+
+now we created a new image by using docker file. before going to run this file, need to kill and remove the containers are running in 8002 port number..
+sudo docker container kill 503f2274339f
+sudo docker container rm 503f2274339f
+
+Run the final_app image
+sudo docker run -itd -p 8002:8002 final_app
+
+
+

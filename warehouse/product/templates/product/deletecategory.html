@@ -1,0 +1,10 @@
+{% extends "product/home.html"%}
+{% block content %}
+<h1>Delteing Category</h1>
+<p>Name: {{category.name}}</p>
+<form method="post">
+	{% csrf_token%}
+	Do yoreally want to delete?<input type="submit" name="" value="YES">
+	
+</form>
+{% endblock %}

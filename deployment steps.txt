@@ -1,0 +1,42 @@
+need to copy your code from local or from git to required server
+create database
+goto the project folder and run requirements.txt
+pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
+python manage.py collectstatic
+
+and run the server
+
+gunicorn --bind 0.0.0.0:8001 warehouse.wsgi --workers=5
+Install nginx 
+
+sudo apt-get install nginx
+
+check the status of nginx
+service nginx status
+
+If it's not running then need to start
+
+service nginx start
+
+Open default configuration file for nginx. It may contain some default configuration..
+sudo vim /etc/nginx/sites-enabled/default
+
+better copy that default configuration some other file..
+
+sudo cp /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default_bkp
+
+Remove the total data from default file and add the below lines..
+
+server{
+    listen 80;
+    server_name localhost;
+    location /{
+        return 301 "http://localhost:8001/";
+}
+location /doc{
+        return 301 "http://localhost:8002/";
+}
+
+}

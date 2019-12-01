@@ -1,0 +1,12 @@
+{% extends "product/home.html"%}
+{% block content %}
+<h2>creating category</h2>
+<form method="post">
+	{% csrf_token %}
+	NAME: <input type="text" name="cat_name">
+	<input type="submit" name="" value="create category">
+</form>
+
+{% endblock %}
+<!-- 
+ -->

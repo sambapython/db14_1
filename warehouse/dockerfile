@@ -1,0 +1,7 @@
+FROM python:3.7
+ADD . /
+RUN pip install -r requirements.txt
+RUN python manage.py makemigrations
+RUN python manage.py migrate
+RUN chmod 777 entry.sh
+ENTRYPOINT ["/entry.sh"]

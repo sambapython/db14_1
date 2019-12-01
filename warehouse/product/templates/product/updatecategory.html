@@ -1,0 +1,8 @@
+{% extends "product/home.html"%}
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	<input type="text" name="cat_name" value="{{ category.name }}">
+	<input type="submit" name="" value="Submit">
+</form>
+{% endblock %}

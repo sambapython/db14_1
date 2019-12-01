@@ -1,0 +1,24 @@
+scalability(multiple contaiers of same app has 
+too run. You need to configure a load bala
+ncer[nginx] to pass the load properly to the 
+multiple containers.(4 nginx,10 app containers))
+
+High availabilty:(clustering mechnism.
+need to install the containers in to multiple
+vms.(2 vms: 1: 2 nginx,5 app containers.
+			2: 2 nginx,5 app containers.) 
+If one vm goes down. The cluster s/w
+will redirect to request to some other vm)
+
+resilience:In the above HA one vm goes down, How many containers are available?
+2 nginx and 5 app container this will reduce your scalability to 50 %.
+
+Once the vm goes down, automatically the containers which are runnning in the down vm
+has to push to the vm whih is available.
+
+MATSER SLAVE CONCEPT:
+
+The cluster software(docker-swarm, kubernetes) will install in the master vm.
+The app container will run on the slave nodes.
+in slave nodes there is an agent to ping by this master.
+

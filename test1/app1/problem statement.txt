@@ -1,0 +1,16 @@
+Stock management.
+
+Warehouse: manager:  manages the products
+           supplier: will supply the products to warehouse
+           customer:  will take away products from warehouse
+Owner of ware house:
+
+1) Current stock: product wise, category wise, supplier
+2)Transaction report: product wise: stock in  and stockout
+					  customer wise
+					  supplier wise
+
+Entities:
+	Product
+	User: supplier, customer, manager
+	

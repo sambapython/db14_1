@@ -1,0 +1,96 @@
+<!-- <a href="/create_category">Create Category</a>
+
+ -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Ware house management</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/style.css"></link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body style="height:1500px">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <a class="navbar-brand" href="/"><img src="/static/images/logo.jpg"
+      width="50px" height="50px"></a>
+    <h1>WAREHOSE MANAGEMENT</h1>
+  </nav>
+
+
+  <div class="container ">
+    <div class="row">
+      {% block content %}
+      <div class="col-sm-2">
+        <h3>CATEGORIES</h3>
+        <a href="/create_category/">Create Category</a>
+        <table class="table-bordered">
+          <thead>
+            <tr><th>NAME</th><th>Operations</th></tr>
+          </thead>
+          <tbody>
+            {% for category in categories %}
+      <tr>
+        <td>{{category.name}} </td>
+        <td><a href="/update_category/{{category.id}}">update</a> || <a href="/delete_category/{{category.id}}">delete</a></td>
+      </tr> 
+       {% endfor %}
+          </tbody>
+        </table>
+        
+  	    </div>
+      <div class="col-sm-4">
+        <h3>PRODUCTS</h3>
+        <a href="/create_product">Create Product</a>
+        <table class="table-bordered">
+          <thead>
+            <tr>
+              <th>NAME</th><th>CATEGORY</th><th>DESCRIPTION</th>
+<th>PIC</th>
+              <th>Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for product in products %}
+            <tr>
+              <td>{{ product.name}}</td><td>{{ product.category}}</td>
+              <td>{{ product.description}}</td>
+              <td><img src="/media/{{ product.pic }}" width=30 height=10></td>
+              <td><a href="/update_product/{{product.id}}">UPDATE</a>||<a href="/delete_product/{{product.id}}">DELETE</a></td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+        
+        
+      </div>
+      <div class="col-sm-6">
+        <h3>TRANSACTIONS</h3>        
+       <a href="/create_transaction">Create Transaction</a>
+       <table class="table-bordered">
+        <thead>
+          <tr><th>PRODUCT</th><th>QUANTITY</th><th>TYPE</th><th>DESCRIPTION</th>
+          <th>Operations</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for transaction in transactions%}
+          <tr><td>{{transaction.product}}</td>
+            <td>{{transaction.quantity}}</td>
+            <td>{{transaction.type}}</td>
+            <td>{{transaction.description}}</td>
+            <td><a href="/update_transaction/{{transaction.id}}">UPDATE</a>||<a href="/delete_transaction/{{transaction.id}}">DELETE</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+       </table>
+      </div>
+      {% endblock %}
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+---
+version: '3.3'
+
+services:
+  web:
+    build: .
+    command: sh /entry.sh
+    ports:
+      - 8002:8002
+  nginx:
+    build: ./nginx
+    ports:
+      - 82:80
