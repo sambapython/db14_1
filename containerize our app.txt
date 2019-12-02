@@ -97,4 +97,13 @@ Run the final_app image
 sudo docker run -itd -p 8002:8002 final_app
 
 
+To push our image in to docker hub
+build an image with proper name
+sudo docker build -t warehousemanagement .
 
+tag an image with your username
+sudo docker tag warehousemanagement sambaodoo/warehousemanagement
+
+push your image to the docker hub
+
+sudo docker push sambaodoo/warehousemanagement

@@ -1,0 +1,1 @@
+docker run -itd -p 8002:8002 sambaodoo/warehousemanagement
