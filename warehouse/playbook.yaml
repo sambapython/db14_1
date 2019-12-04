@@ -5,3 +5,15 @@
     docker_compose:
      project_src: ./
      state: present
+    docker_compose:
+     project_src: ./nodeexporter
+     state: present
+    docker_compose:
+     project_src: ./cadvisor
+     state: present
+    docker_compose:
+     project_src: ./prometheus
+     state: present
+    docker_compose:
+     project_src: ./grafana
+     state: present

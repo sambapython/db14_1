@@ -1,0 +1,28 @@
+version: '3'
+networks:
+  monitor-net:
+    driver: bridge
+volumes:
+    prometheus_data: {}
+    grafana_data: {}
+services:
+  grafana:
+   image: grafana/grafana:latest
+   volumes:
+     - grafana_data:/var/lib/grafana
+     - ./grafana/datasources:/etc/grafana/datasources
+     - ./grafana/dashboards:/etc/grafana/dashboards
+     - ./grafana/setup.sh:/setup.sh
+   user: root
+   #entrypoint: chmod -R 755 ./grafana/setup.sh && /setup.sh
+   environment:
+     - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
+     - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+     - GF_USERS_ALLOW_SIGN_UP=false
+   restart: unless-stopped
+   expose:
+     - 3000
+   ports:
+     - 3000:3000
+   networks:
+     - monitor-net
