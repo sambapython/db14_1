@@ -1,0 +1,33 @@
+Need to add one more data base in to settings.
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'replica': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'replica.sqlite3'),
+    }
+
+}
+
+execute migrate command to second database.
+python manage.py migrate --database="replica"
+
+
+ from product.models import Category
+
+In [2]: cat = Category(name="replica")
+
+In [3]: cat.save()
+
+In [4]: cat.save(using="replica")
+
+In [5]: Category.objects.all()
+Out[5]: <QuerySet [<Category: cat1_3>, <Category: cat1>, <Category: replica>]>
+
+In [6]: Category.objects.using('replica').all()
+Out[6]: <QuerySet [<Category: replica>]>
+
+In [7]: cat.delete(using="replica")
+Out[7]: (1, {'product.Category': 1})

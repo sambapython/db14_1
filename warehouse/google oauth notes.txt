@@ -1,0 +1,9 @@
+GO HERE: https://developers.google.com/identity/protocols/OAuth2
+
+click on Google API console link. click on credentials menu from left menu bar.
+
+click on create credentials. select OAUTH client id.
+
+application type: select webapplication.
+
+mention redirect url which you already designed. This is the url called by google to send refresh token.

@@ -1,0 +1,8 @@
+2019-12-08 10:54:33,298->INFO->category creating->product.category
+2019-12-08 10:54:33,298->INFO->got all categories->product.category
+2019-12-08 10:54:55,523->INFO->category creating->product.category
+2019-12-08 10:54:55,523->INFO->got all categories->product.category
+2019-12-08 10:54:55,524->DEBUG->data to create category: <QueryDict: {'csrfmiddlewaretoken': ['EcX5ihvRWtYOW1psFiyIWC6BFdFivAFNyofphKSvs0uILILjHCREul2tAkpa6Fso'], 'cat_name': ['cat_log']}>->product.category
+2019-12-08 10:54:55,680->INFO->category created successfully->product.category
+2019-12-08 12:06:19,452->INFO->category creating->product.category
+2019-12-08 12:06:19,452->INFO->got all categories->product.category

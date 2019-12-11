@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
 from product.forms import ProductForm
 from product.models import Product
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def deleteproduct(request,pk):
 	msg=""
 	product = Product.objects.get(id=pk)
@@ -11,6 +14,8 @@ def deleteproduct(request,pk):
 		form=ProductForm(instance=product)
 	return render(request,"product/check_product.html",
 		{"form":form,"message":msg})
+
+@login_required
 def updateproduct(request,pk):
 	msg=""
 	product = Product.objects.get(id=pk)
@@ -25,6 +30,8 @@ def updateproduct(request,pk):
 		form=ProductForm(instance=product)
 	return render(request,"product/product_form.html",
 		{"form":form,"message":msg})
+
+@login_required
 def createproduct(request):
 	if request.method=="POST":
 		form = ProductForm(request.POST,files=request.FILES)

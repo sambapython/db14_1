@@ -1,0 +1,12 @@
+{% extends "product/home.html"%}
+{% block content %}
+<h1>REGISTRATION</h1>
+<h4>{{msg }}</h4>
+<form method="post">
+	{% csrf_token %}
+	USER NAME: <input type="text" name="username"><br><br>
+	PASSWORD: <input type="password" name="password"><br>
+	<input type="submit" name="" value="SIGNIN">
+	
+</form>
+{% endblock %}

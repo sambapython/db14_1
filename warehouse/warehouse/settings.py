@@ -79,7 +79,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'replica': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'replica.sqlite3'),
     }
+
 }
 
 
@@ -125,6 +130,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+LOGIN_URL = "/signin"
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
@@ -136,3 +143,43 @@ REST_FRAMEWORK = {
         )
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+    }
+}
+LOGGING ={
+            'version': 1,
+            'disable_existing_loggers':False,
+            'formatters':{
+                'simple':{
+                    'format':"%(asctime)s->%(levelname)s->%(message)s->%(name)s"
+                },
+
+
+            },
+            'handlers': {
+                'console': {
+                    'class': 'logging.StreamHandler',
+                    #'class': 'logging.FileHandler',
+                    #'filename':'log.txt',
+                    'formatter': "simple",
+                    },
+                'file': {
+                    'class': 'logging.FileHandler',
+                    'filename':'log.txt',
+                    'formatter': "simple",
+                    },
+                },
+            'loggers': {
+                'product': {
+                'handlers': ['file'],
+
+                'level': "DEBUG"},
+                },
+}
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 5
+CLIENT_ID = ""
+CLIENT_SECRET = ""
